@@ -3,8 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User
+/**
+ * Пользователь
+ */
+class User extends Model
 {
     use HasFactory;
 
@@ -39,4 +44,14 @@ class User
         'permissions' => 'array',
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Кошельки пользователя
+     *
+     * @return HasMany
+     */
+    public function wallets(): HasMany
+    {
+        return $this->hasMany(Wallet::class);
+    }
 }
